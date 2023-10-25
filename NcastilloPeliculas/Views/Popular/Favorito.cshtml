@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Favorito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista Favoritos</h1>
+
+<div class="row">
+
+    @foreach (PLMVC.Models.Pelicula pelicula in Model.Peliculas)
+    {
+
+        <div class="card" style="width: 18rem;">
+
+            <img src="@pelicula.poster_path" class="card-img-top" alt="Imagen">
+
+            <div class="card-body">
+                <h5 class="card-title">@pelicula.title</h5>
+                <p class="card-text">@pelicula.original_title</p>
+                <p class="card-text">@pelicula.id</p>
+                <p class="card-text">@pelicula.overview</p>
+                <p class="card-text">@pelicula.release_date</p>
+                <p class="card-text">@pelicula.popularity</p>
+                <a href="#" class="btn btn-danger">Agregar a favoritos </a>
+                <br />
+                <br />
+                <hr />
+
+            </div>
+
+        </div>
+
+    }
+</div>

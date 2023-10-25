@@ -1,0 +1,68 @@
+﻿@model MLCore.Cine
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">CINES</h1>
+
+<a href="@Url.Action("Form", "Cine")" class="btn btn-warning">Agregar</a>
+
+<div class="conteiner">
+
+    <table class="table table-danger table-striped">
+
+        <thead class="table-danger">
+
+            <tr class="table-info">
+
+                <th>ID Cine</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Ventas</th>
+                <th>ID Zona</th>
+                <th>Nombre de la Zona</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
+
+            </tr>
+
+
+        </thead>
+
+        <tbody>
+
+            @foreach(MLCore.Cine cine in Model.Cines)
+            {
+                
+                <tr>
+
+                    <td>@cine.IdCine</td>
+                    <td>@cine.Nombre</td>
+                    <td>@cine.Direccion</td>
+                    <td>@cine.Ventas</td>
+                    <td>@cine.Zona.IdZona</td>
+                    <td>@cine.Zona.Nombre</td>
+                    <td><a class="btn btn-outline-dark" href="@Url.Action("Form", "Cine", new {IdCine = cine.IdCine})">Actualizar</a></td>
+                    <td><a class="btn btn-dark" href="@Url.Action("Delete", "Cine", new {IdCine = cine.IdCine})" onclik="return confirm('Estas seguro de eliminar este registro?');">Eliminar</a></td>
+
+
+
+                </tr>
+
+
+            }
+
+
+
+        </tbody>
+
+
+
+
+    </table>
+
+
+
+
+</div>

@@ -1,0 +1,149 @@
+﻿@model MLCore.Cine
+@{
+    ViewData["Title"] = "Ventas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">Ventas</h1>
+<br />
+<br />
+<br />
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<style>
+
+#map {
+    height: 400px; 
+    width: 100%; 
+}
+
+</style>
+
+
+<script>
+
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: "AIzaSyCSKBDdPPlfca_zTwyxKiicRQn1qfgRjLw",
+    });
+</script>
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
+
+
+
+
+
+<br />
+<br />
+<br />
+
+<!--Aqui va el mapa -->
+<div id="map"></div>
+
+@section scripts{
+    <script typeof="text/javascript">
+
+        //Inicializa el mapa
+        let map;
+        var position;
+
+        //funcion para mostrar el mapa
+        async function initMap() {
+     
+        // Libreria mapa
+        const { Map } = await google.maps.importLibrary("maps");
+
+        @foreach(MLCore.Cine cine in Model.Cines)
+        {
+            <text>
+                var geocodes = new google.maps.Geocoder();
+                geocodes.geocode({ 'address': '@cine.Direccion' }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var direccion = { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() };
+                        new google.maps.Marker({
+                            position: direccion,
+                            map,
+                            title: "@cine.Zona.Nombre",
+                        });
+                    }
+
+                });
+
+
+                let infoWindow = new google.maps.InfoWindow({
+                    content: "@cine.Nombre", "@cine.Direccion"
+                    position: position,
+                });
+
+
+                infoWindow.open(map);
+
+            
+            </text>
+            
+        }
+
+            
+        
+        position = { lat: 19.430570307662446, lng: -99.16166352568936 };
+        createMap(position);
+
+            
+     }
+
+        function createMap(position) {
+            // The map, centered at the specified position
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: position,
+                mapId: "DEMO_MAP_ID",
+            });
+
+           
+        }
+
+        initMap();
+
+    </script>
+
+    
+
+    <script>
+        window.onload = function () {
+
+            var options = {
+                title: {
+                    text: "Ventas por zona"
+                },
+                subtitles: [{
+                    text: "As of November, 2017"
+                }],
+                animationEnabled: true,
+                data: [{
+                    type: "pie",
+                    startAngle: 40,
+                    toolTipContent: "<b>{label}</b>: {y}%",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}%",
+                    dataPoints: [
+                        { y: @Model.Estadistica.Norte, label: "Norte" },
+                        { y: @Model.Estadistica.Sur, label: "Sur" },
+                        { y: @Model.Estadistica.Este, label: "Este" },
+                        { y: @Model.Estadistica.Oeste, label: "Oeste" }
+                    ]
+                }]
+            };
+            $("#chartContainer").CanvasJSChart(options);
+
+        }
+    </script>
+
+
+}

@@ -1,0 +1,58 @@
+﻿@model MLCore.Usuario
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+   
+}
+
+   <h5>INICIO DE SESION</h5>
+    
+    <div class="container">
+
+                   
+
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                 
+               
+                <br><br><br><br>
+                <div class="row">
+                <div class="col-md-6">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new{@class="form-control"})
+                </div>
+                <div class="col-md-6">
+                @Html.LabelFor(model => model.Password)
+                @Html.TextBoxFor(model => model.Password, new {@class="form-control", @type="password"})
+                </div>
+                </div>
+                <hr />
+
+                <button class="btn btn-danger">Iniciar</button>
+
+                <a href="@Url.Action("Registro", "Login")" class="btn btn-danger">Registrarse</a>
+
+                <br>
+
+                <br>
+
+                <br>
+
+                <a href="@Url.Action("Password", "Login")"><p>Cambiar contraseña</p></a>
+
+                <br>
+                
+                <a href="@Url.Action("RecuperarPassword", "Login")"><p>Olvido su contraseña?</p></a>
+               
+
+               }
+
+    
+
+        </div>
+    
+
+    
+

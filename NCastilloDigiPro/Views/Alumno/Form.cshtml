@@ -1,0 +1,38 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Formulario</h2>
+
+<h4 class="text-center">Ingresa los campos requeridos</h4>
+
+@using (Html.BeginForm("Form", "Alumno", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.HiddenFor(model => model.IdAlumno)
+
+
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ApellidoPaterno)
+            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ApellidoMaterno)
+            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <button class="btn btn-dark" type="submit">GUARDAR</button>
+    <a class="btn btn-dark" href="@Url.Action("GetAll", "Alumno")">REGRESAR</a>
+
+}

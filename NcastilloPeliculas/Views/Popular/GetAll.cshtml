@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model PLMVC.Models.Pelicula
+
+@{
+
+
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+<h1 class="text-center">PELICULAS</h1>
+
+
+<div class="row">
+
+    @foreach(PLMVC.Models.Pelicula pelicula in Model.Peliculas)
+      {   
+
+<div class="card" style="width: 18rem;">
+   
+     <img src="@pelicula.poster_path" class="card-img-top" alt="Imagen">
+
+    <div class="card-body">
+        <h5 class="card-title">@pelicula.title</h5>
+                <p class="card-text">@pelicula.original_title</p>
+                <p class="card-text">@pelicula.id</p>
+        <p class="card-text">@pelicula.overview</p>
+                <p class="card-text">@pelicula.release_date</p>
+                <p class="card-text">@pelicula.popularity</p>
+        <a href="#" class="btn btn-danger">Agregar a favoritos </a>
+                <br />
+                <br />
+                <hr />
+
+    </div>
+
+</div>
+
+      }
+</div>
+
+<script type="text/javascript">
+
+    let table = new DataTable('#myTable', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+
+</script>
+

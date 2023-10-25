@@ -1,0 +1,49 @@
+﻿@model MLCore.Dulceria
+@{
+    ViewData["Title"] = "Dulceria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<hr />
+<h1 class="text-center">Dulceria</h1>
+<hr />
+<br />
+<br />
+
+<div class="row">
+
+    @foreach(MLCore.Dulceria dulceria in Model.Dulcerias)
+    {
+        
+ <div class="col-md-4">
+<div class="card" style="width: 18rem;">
+    <img src="data:image /*;base64,@dulceria.Imagen" width="50" height="50" class="card-img-top" alt="Cargando">
+    <div class="card-body">
+        <h5 class="card-title">@dulceria.Nombre</h5>
+        <p class="card-subtitle">$ @dulceria.Precio</p>
+        <a href="@Url.Action("Carrito", "Dulceria", new {IdDulceria = dulceria.IdDulceria})" class="btn btn-danger">Agregar al carrito</a>
+    </div>
+</div>
+<br/>
+<br/>
+
+</div>
+}
+<br />
+<br />
+<br />
+</div>
+
+
+
+
+   
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+﻿@model MLCore.Usuario
+@{
+    ViewData["Title"] = "Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+
+            
+                <h1 class="text-center">Bienvenido</h1>
+                <h3 class="text-center">Registre su cuenta</h3>
+
+
+            
+            @using (Html.BeginForm("Registro", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+           
+                <br><br><br><br>
+
+                <input name="username" type="text" placeholder="Username*" />
+
+                <input name="email" type="text" placeholder="Email*" />
+
+                <input name="nombre" type="text" placeholder="Nombre*"  />
+
+                <input name="password" type="password" placeholder="Password*" />
+
+        <br>
+
+        <br>
+
+        <br>
+
+        <br>
+
+                <button class="btn btn-success">Listo</button>
+           
+            }
+            
+        </div>
+   
+
+    

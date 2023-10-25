@@ -1,0 +1,65 @@
+﻿@model ML.AlumnoMateria
+@{
+    ViewBag.Title = "GetMateriaAsignada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Materias Asignadas</h2>
+<h3 class="text-center">Alumno @Model.Alumno.IdAlumno</h3>
+<hr />
+
+<a href="@Url.Action("Form", "AlumnoMateria")" class="btn btn-outline-dark">Agregar</a>
+
+<hr />
+
+<div class="conteiner">
+
+    <table class="table table-danger">
+
+        <thead class="table table-dark">
+
+            <tr class="table table-dark">
+
+                <th>Id Alumno</th>
+                <th>Id Materia</th>
+                <th>Nombre Materia</th>
+                <th>Costo Materia</th>
+                <th>Eliminar</th>
+
+
+            </tr>
+
+
+
+        </thead>
+
+        <tbody>
+            @foreach(ML.AlumnoMateria alumnoMateria in Model.AlumnosMaterias)
+            {
+
+                <tr>
+
+                    <td>@alumnoMateria.Alumno.IdAlumno</td>
+                    <td>@alumnoMateria.Materia.IdMateria</td>
+                    <td>@alumnoMateria.Materia.Nombre</td>
+                    <td>@alumnoMateria.Materia.Costo</td>
+                    <td><a class="btn btn-dark" href="@Url.Action("Delete", "AlumnoMateria", new { IdMateria = alumnoMateria.Materia.IdMateria, IdAlumno = alumnoMateria.Alumno.IdAlumno })" onclick="return confirm('Estas seguro que deseas ELIMINAR esta MATERIA?');">Eliminar</a></td>
+
+
+
+                </tr>
+
+
+
+            }
+
+
+
+        </tbody>
+
+
+    </table>
+
+
+
+</div>
